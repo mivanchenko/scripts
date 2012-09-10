@@ -5,7 +5,7 @@ use Perl::Critic;
 my @files = @ARGV;
 print "Usage: $0 <file1> ...\n" unless scalar(@ARGV);
 
-my $critic = Perl::Critic->new( -profile => '/home/michael/.perlcriticrc' );
+my $critic = Perl::Critic->new( -profile => "$ENV{'HOME'}/.perlcriticrc" );
 
 foreach my $file ( @files ) {
 	my @violations = $critic->critique( $file );
