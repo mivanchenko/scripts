@@ -13,3 +13,6 @@ print "match: [$match]\n";
 print "match1: [$match1], match2: [$match2]\n";
 print "matches: [@matches]\n";
 print "count: [$count]\n";
+
+## matches word with the first char the same as the last one
+#$string =~ /^(.{1}).*\1$/
