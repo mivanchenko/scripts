@@ -1,5 +1,7 @@
 #!/usr/bin/env perl
 
+use Path::Class;
+
 sub _read_filepaths
 {
     my $self = shift;
