@@ -6,9 +6,12 @@ sub new {
 	return bless {}, __PACKAGE__;
 }
 
-sub diag {
-	my $self = shift;
-	return 1;
+sub pass {
+	$_[0]->{'password'} = $_[1]; return 1;
+}
+
+sub get_pass {
+	return $_[0]->{'password'};
 }
 
 1;
