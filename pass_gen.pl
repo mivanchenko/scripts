@@ -1,6 +1,6 @@
 #!/usr/bin/env perl
 
-my $uid = gen_pass( 10 );
+my $uid = gen_pass( 16 );
 print "$uid\n";
 
 sub gen_pass
