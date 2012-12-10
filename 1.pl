@@ -1,13 +1,7 @@
 #!/usr/bin/env perl
 
-use Carp;
-use English qw( -no_match_vars );
-#use Fatal qw( open close );
+use strict;
+use warnings;
 
-my $file = 'z';
+use Data::Dumper;
 
-open my $fh, '<', $file
-	or croak "Can't open [$file]: [$OS_ERROR]"
-;
-close $fh;
-close $fhd;
