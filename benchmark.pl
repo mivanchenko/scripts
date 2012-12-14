@@ -1,12 +1,12 @@
 #!/usr/bin/env perl
 
-use Benchmark qw( :all );
+use Benchmark qw( cmpthese );
 
 my $str = q{
 	abcd abcz qwer qwet asdf asdg zxcv zxcb
 };
 
-cmpthese( 1e8, {
+cmpthese( 1e6, {
 	'sub1' => &sub1( $str ),
 	'sub2' => &sub2( $str ),
 });
