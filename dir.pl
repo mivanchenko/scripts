@@ -1,12 +1,24 @@
 #!/usr/bin/env perl
 
 
+# Returns filenames
 use File::Find;
 find( sub { /p[lm]$/ && print "$_\n" }, '.' );
 
 
-use Path::Class;
+# Returns absolute paths recursively
+use Path::Class::Rule;
+my @files;
+my $rule = Path::Class::Rule->new->perl_file;
+$rule->not_name( qr/.*sw[op]$/ );
 
+foreach my $file ( $rule->all('.') ) {
+	push @files, $file->{'dir'}->absolute->stringify.'/'.$file->{'file'};
+}
+
+
+# Returns absolute paths recursively
+use Path::Class;
 my @files;
 dir('.')->recurse( callback => sub {
     my $file = shift;
@@ -17,6 +29,8 @@ dir('.')->recurse( callback => sub {
 print Dumper \@files;
 
 
+# Returns absolute paths non-recursively
+use Path::Class;
 sub _read_filepaths {
 	my ($self, $path) = @_;
 	my @filepaths;
