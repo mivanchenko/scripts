@@ -4,38 +4,29 @@ use strict;
 use warnings;
 
 use Data::Dumper;
-use Fatal qw( open close );
-use Module::ExtractUse;
+use List::MoreUtils qw( uniq );
+use Module::Extract::Use;
 use Path::Class::Rule;
 
-my $code_string = get_code_string('.');
+my $dir = '.';
 
-my $extractor = Module::ExtractUse->new;
+my $extractor = Module::Extract::Use->new;
 
-my @used = sort $extractor->extract_use( \$code_string )->array;
+my $files = get_perl_files( $dir );
 
-print join( "\n", @used );
-print "\n";
+my @modules;
+
+foreach my $file ( @{$files} ) {
+	push @modules, $extractor->get_modules( $file );
+}
+
+@modules = sort( uniq( @modules ) );
+
+print Dumper \@modules;
+
 
 # END
 
-# Returns a sheet of perl code for a given dir recursively
-sub get_code_string {
-	my $dir = shift;
-	my $code_string;
-
-	my $files = get_perl_files( $dir );
-
-	foreach my $file ( @{$files} ) {
-		open my $fh, '<', $file;
-		while ( my $line = <$fh> ) {
-			$code_string .= $line;
-		}
-		close $fh;
-	}
-
-	return $code_string;
-}
 
 # Finds all files with perl code
 sub get_perl_files {
