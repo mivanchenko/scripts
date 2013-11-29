@@ -1,0 +1,66 @@
+#!/bin/bash
+# Window Recorder v3.0 2013-11-29 by Michael Ivanchenko (perlino.blogspot.com)
+# http://linuxhub.ru/viewtopic.php?f=23&p=404
+# Copyright (c) 2013 by Poltavchenko Dmitriy <zen@root.ua>
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 3 of the License, or
+# (at your option) any later version.
+# Usage:
+#     Start recording:
+#         ./recwindow, click on window
+#     Stop recording:
+#         ./recwindow
+# Create a panel icon to click for record, click for stop
+
+VIDEO_DIR=~/Video
+VIDEO_FILE="$(date '+%F_%H%M%S')"
+VIDEO_EXT=mkv
+
+VIDEO_PATH="$VIDEO_DIR/$VIDEO_FILE.$VIDEO_EXT"
+VIDEO_NAME="$VIDEO_DIR/$VIDEO_FILE"
+PID_FILE=$0.pid
+NAM_FILE=$0.nam
+
+function start () {
+	PARAMS=`xwininfo | egrep 'Absolute|Width|Height' | awk -F: '{print $2}'`
+	if [[ -z $PARAMS ]]
+	then
+		echo "Не удалось получить параметры окна"
+		exit 1;
+	fi
+	VAL=(XOFF YOFF XW YH)
+	ENCODER_OPT="-video_size XWxYH -i :0.0+XOFF,YOFF"
+	NUM=0
+	for i in $PARAMS
+	do
+		TMP=$i
+		if [[ ($NUM -ge 2) && ($(($TMP%2)) != 0) ]]
+		then
+		TMP=$(($TMP+1))
+		fi
+		ENCODER_OPT=$(echo $ENCODER_OPT | sed "s/${VAL[$NUM]}/$TMP/g")
+		let NUM+=1
+	done
+	echo $VIDEO_NAME > $NAM_FILE
+	ffmpeg -f alsa -i pulse -f x11grab -framerate 24 \
+	-show_region 1 $ENCODER_OPT -threads 4 -q 1 -bt 8000000 \
+	-b 8500000 -y $VIDEO_PATH & echo $! > $PID_FILE
+}
+function stop () {
+	kill -SIGQUIT $PID
+	rm -f $PID_FILE
+	VIDEO_NAME=$(cat $NAM_FILE)
+	VIDEO_PATH="$VIDEO_NAME.$VIDEO_EXT"
+	VIDEO_PATH_MP4="$VIDEO_NAME.mp4"
+	ffmpeg -i $VIDEO_PATH -acodec mp2 $VIDEO_PATH_MP4
+	notify-send "Converted" "$VIDEO_PATH_MP4"
+	rm -f $NAM_FILE
+}
+PID=$(cat $PID_FILE)
+if [ -z $PID ]
+then
+	start
+else
+	stop
+fi
