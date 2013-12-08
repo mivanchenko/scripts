@@ -78,7 +78,7 @@ function stop () {
 	rm -f $NAM_FILE
 }
 require notify-send xwininfo nice egrep awk sed date
-PID=$(cat $PID_FILE 2>/dev/null)
+PID=$(pgrep -F $PID_FILE 2> /dev/null)
 if [ -z $PID ]
 then
 	start
