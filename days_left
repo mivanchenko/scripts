@@ -1,0 +1,24 @@
+#!/bin/bash
+
+OFFSET=1
+NEW_YEAR='20140101'
+#FREEZE='20140101'
+#RELEASE='20140101'
+
+NAMES=(\
+"   To New Year:" \
+"To code freeze:" \
+"   To release:" \
+)
+
+TODAY=$(date +'%Y%m%d')
+SECONDS_TODAY=$(date --date=$TODAY +%s)
+
+STEP=0
+for DATE in $NEW_YEAR $FREEZE $RELEASE
+do
+	SECONDS=$(date --date=$DATE +%s)
+	DAYS_TO_DATE=$(( ($SECONDS - $SECONDS_TODAY) / (60*60*24) - $OFFSET ))
+	echo "${NAMES[$STEP]} $DAYS_TO_DATE"
+	STEP=$(($STEP + 1))
+done
