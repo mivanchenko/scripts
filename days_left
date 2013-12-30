@@ -1,24 +1,27 @@
-#!/bin/bash
+#!/usr/bin/env perl
 
-OFFSET=1
-NEW_YEAR='20140101'
-#FREEZE='20140101'
-#RELEASE='20140101'
+# Friday before the release:
+# https://confluence.tm.tmcs/confluence/display/ECOM/Current
 
-NAMES=(\
-"   To New Year:" \
-"To code freeze:" \
-"   To release:" \
-)
+use strict;
+use warnings;
 
-TODAY=$(date +'%Y%m%d')
-SECONDS_TODAY=$(date --date=$TODAY +%s)
+my %dates = (
+	'To New Year' => '20140101',
+	'To Das Ball' => '20140110',
+);
 
-STEP=0
-for DATE in $NEW_YEAR $FREEZE $RELEASE
-do
-	SECONDS=$(date --date=$DATE +%s)
-	DAYS_TO_DATE=$(( ($SECONDS - $SECONDS_TODAY) / (60*60*24) - $OFFSET ))
-	echo "${NAMES[$STEP]} $DAYS_TO_DATE"
-	STEP=$(($STEP + 1))
-done
+my @dates_names = (
+	'To New Year',
+	'To Das Ball',
+);
+
+my $offset = 1;
+
+my $seconds_today = `date -ud \$(date -u +'%Y%m%d') +%s | tr -d "\n"`;
+
+foreach my $date_name ( @dates_names ) {
+	my $seconds = `date -ud $dates{$date_name} +%s | tr -d "\n"`;
+	my $days_to_date = ( ($seconds - $seconds_today) / (60*60*24) - $offset);
+	print "$date_name: $days_to_date\n";
+}
