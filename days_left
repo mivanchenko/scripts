@@ -1,14 +1,13 @@
 #!/usr/bin/env perl
 
-# Friday before the release:
-# https://confluence.tm.tmcs/confluence/display/ECOM/Current
-
 use strict;
 use warnings;
 
 my %dates = (
-	'To New Year' => '20140101',
-	'To Das Ball' => '20140110',
+	'To New Year' => '20150101',
+	# Friday before the release:
+	# https://confluence.tm.tmcs/confluence/display/ECOM/Ecommerce+Release+Dates+2014
+	'To Das Ball' => '20140124',
 );
 
 my @dates_names = (
