@@ -1,0 +1,20 @@
+---------------------------bOuNdArY
+Content-Disposition: form-data; name="uploadFile"; filename="myfile.bin";
+Last-Modified: 2014-09-18
+Content-Type: application/octet-stream
+
+Give me some automated file upload action!
+
+---------------------------bOuNdArY
+Content-Disposition: form-data; name="catalog.42"; filename="myfile.bin";
+Content-Type: application/octet-stream
+
+Catalog content.
+
+---------------------------bOuNdArY
+Content-Disposition: form-data; name="product_image"; filename="myfile.bin";
+Content-Type: application/octet-stream
+
+Image content.
+
+---------------------------bOuNdArY
