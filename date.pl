@@ -4,14 +4,14 @@ use POSIX qw( strftime );
 my $date = strftime( '%Y%m%d', gmtime(time) );
 print "$date\n";
 
+use POSIX;
+my $date = POSIX::strftime( '%Y-%m-%d %H:%M:%S', localtime );
+my $date = POSIX::strftime( "[%Y-%m-%d %H:%M:%S]\n", localtime );
+print "$date\n";
 
 use Time::HiRes qw( gettimeofday );
 my ($s, $usec) = gettimeofday();
 print "s: [$s], usec: [$usec]\n";
-
-use POSIX;
-$date = POSIX::strftime( '%Y-%m-%d %H:%M:%S', localtime );
-print "$date\n";
 
 ######################
 

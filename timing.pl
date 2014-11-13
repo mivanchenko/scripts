@@ -1,11 +1,11 @@
 #!/usr/bin/env perl
 
-use Time::HiRes qw( gettimeofday tv_interval );
-my $t0 = [gettimeofday];
+use Time::HiRes;
+my $t0 = [Time::HiRes::gettimeofday()];
 
 slow_function();
 
-print tv_interval( $t0 ) . " sec\n";
+print tv_interval($t0) . " sec\n";
 
 sub slow_function
 {
