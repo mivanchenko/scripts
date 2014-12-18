@@ -6,8 +6,11 @@ print "$date\n";
 
 use POSIX;
 my $date = POSIX::strftime( '%Y-%m-%d %H:%M:%S', localtime );
-my $date = POSIX::strftime( "[%Y-%m-%d %H:%M:%S]\n", localtime );
+my $date = POSIX::strftime( "[%Y-%m-%d %T]\n", localtime );
 print "$date\n";
+
+use Time::Piece;
+my $time = Time::Piece->new->strftime('%Y-%m-%d %T');
 
 use Time::HiRes qw( gettimeofday );
 my ($s, $usec) = gettimeofday();

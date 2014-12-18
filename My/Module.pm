@@ -7,6 +7,7 @@ use base 'Exporter';
 our @EXPORT_OK = qw( add_segments );
 
 our $var = 42;
+my $varlock = 12345;
 
 sub new {
 	return bless {}, __PACKAGE__;
@@ -21,8 +22,12 @@ sub get_pass {
 }
 
 sub add_segments {
-	print "ok\n";
+	print "add_segments: $varlock\n";
 	return 'ok';
+}
+
+sub My::Module::handler {
+	print "handler: $varlock\n";
 }
 
 1;

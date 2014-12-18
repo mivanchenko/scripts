@@ -1,16 +1,42 @@
 #!/usr/bin/env perl
 
 use Getopt::Long;
+use Pod::Usage;
 
-my ($ticket, $branch, $count);
+my ($param);
 
 GetOptions(
-        't|ticket=s' => \$ticket,
-        'c|count=i'  => \$count,
-) or die(
-        "Usage: $0 --ticket=qwe123 --count=75\n"
-        . "   or: $0 -t qwe123 -c 75\n"
-);
+    'p|param=s' => \$param,
+) or pod2usage(2);
 
-print "ticket: [$ticket]\n";
-print "count:  [$count]\n";
+pod2usage(1) if $help;
+
+print "param: [$param]\n";
+
+__END__
+
+=head1 NAME
+
+Name
+
+=head1 SYNOPSIS
+
+ ./$0 --param=value
+
+=head1 OPTIONS
+
+=over 4
+
+=item B<--help>
+
+Print a brief help message and exit.
+
+=item B<--param>
+
+Param to use.
+
+=back
+
+=head1 DESCRIPTION
+
+=cut
