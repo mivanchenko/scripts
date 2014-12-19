@@ -1,6 +1,0 @@
-#!/bin/bash
-
-cd /home/monk00/monk.in.ua/monk
-git checkout HEAD -- .
-git pull
-cd -
