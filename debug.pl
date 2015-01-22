@@ -27,3 +27,17 @@ sub debug {
 		print Dumper( $message );
 	}
 }
+
+# @HACK
+use Data::Dumper;
+warn "\n::DEBUG ".__PACKAGE__.' '.(caller)[3].":\n";
+warn "[]\n";
+
+sub debug {
+	my @messages = @_;
+	use Data::Dumper;
+	print "<<< DEBUG ".__PACKAGE__.((caller)[3]?' '.(caller)[3]:'').":\n";
+#	print Dumper( \@messages );
+	print scalar @messages;
+	print "\n>>>\n";
+}

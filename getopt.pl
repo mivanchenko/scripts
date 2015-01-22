@@ -4,6 +4,7 @@ use Getopt::Long;
 use Pod::Usage;
 
 my ($param);
+my $help = 0;
 
 GetOptions(
     'p|param=s' => \$param,
@@ -14,6 +15,8 @@ pod2usage(1) if $help;
 print "param: [$param]\n";
 
 __END__
+
+=pod
 
 =head1 NAME
 

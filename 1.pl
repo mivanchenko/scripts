@@ -4,9 +4,41 @@ use strict;
 use warnings;
 
 use Data::Dumper;
-use My::Module qw(add_segments);
+use My::Module qw( add_segments );
+
+sub debug {
+	my @messages = @_;
+	use Data::Dumper;
+	print "<<< DEBUG ".__PACKAGE__.((caller)[3]?' '.(caller)[3]:'').":\n";
+#	print Dumper( \@messages );
+	print scalar @messages;
+	print "\n>>>\n";
+}
+
+my $module = My::Module->new();
+$module->add_segments();
+
+debug();
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #my $module = My::Module->new();
 #$module->add_segments();
 

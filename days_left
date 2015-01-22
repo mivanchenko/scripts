@@ -12,7 +12,7 @@ my %dates = (
 
 my @dates_names = (
 	'To New Year',
-	'To Das Ball',
+#	'To Das Ball',
 );
 
 my $offset = 1;

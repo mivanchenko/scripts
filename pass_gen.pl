@@ -1,5 +1,7 @@
 #!/usr/bin/env perl
 
+print 'Use: $ pwgen -vsy 20 1'."\n";
+
 my $uid = gen_pass(12);
 print "$uid\n";
 

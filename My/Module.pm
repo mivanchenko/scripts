@@ -23,11 +23,21 @@ sub get_pass {
 
 sub add_segments {
 	print "add_segments: $varlock\n";
+	debug($varlock);
 	return 'ok';
 }
 
 sub My::Module::handler {
 	print "handler: $varlock\n";
+}
+
+sub debug {
+	my @messages = @_;
+	use Data::Dumper;
+	print "<<< DEBUG ".__PACKAGE__.((caller)[3]?' '.(caller)[3]:'').":\n";
+#	print Dumper( \@messages );
+	print scalar @messages;
+	print "\n>>>\n";
 }
 
 1;
