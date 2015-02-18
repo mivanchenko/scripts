@@ -62,7 +62,7 @@ if ($ep !~ /\/$/) {
     $ep .= '/';
 }
 
-$ep .= 'service/merch_data_sync2';
+$ep .= 'service/endpoint2';
 
 my $fn = $ARGV[1];
 
@@ -77,7 +77,7 @@ my $new_fn = gen_fn($ddd);
 my $ua = LWP::UserAgent->new;
 my $req = HTTP::Request->new(POST=>$ep);
 $req->header(HOST=>$eq);
-$req->header('User-Agent'=>'TMCS::Service::Que');
+$req->header('User-Agent'=>'Module::Name');
 $req->header('Content-Type'=>'multipart/form-data; boundary='.$bnd);
 
 # make the body

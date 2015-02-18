@@ -62,7 +62,7 @@ if ($ep !~ /\/$/) {
     $ep .= '/';
 }
 
-my $path = 'service/merch_data_sync';
+my $path = 'service/endpoint';
 $ep .= $path;
 
 my $fn = $ARGV[1];
@@ -80,10 +80,10 @@ my $EOL = "\r\n";
 
 my $header = "POST $path HTTP/1.1" . $EOL;
 $header   .= "Host: $ARGV[0]" . $EOL;
-$header   .= "User-Agent: TMCS::Service::Que" . $EOL;
+$header   .= "User-Agent: Module::Name" . $EOL;
 
 # HACK for Apache1
-$header   .= "X-Forwarded-Server: tmol.dev100.websys.tmcs" . $EOL;
+$header   .= "X-Forwarded-Server: server.host" . $EOL;
 
 my $header1 = "--$bnd" . $EOL;
 $header1 .= 'Content-Disposition: form-data; name="product_image"; filename="'.$new_fn.'"'.$EOL;
@@ -116,7 +116,7 @@ close $fh;
 my $ua = LWP::UserAgent->new;
 my $req = HTTP::Request->new(POST=>$ep);
 $req->header(HOST=>$ARGV[0]);
-$req->header('User-Agent'=>'TMCS::Service::Que');
+$req->header('User-Agent'=>'Module::Name');
 $req->header('Content-Type'=>'multipart/form-data; boundary='.$bnd);
 $req->header('Content-Length', length($data));
 $req->content($data);
