@@ -4,8 +4,43 @@ use strict;
 use warnings;
 
 use Data::Dumper;
-use My::Module qw( add_segments );
 
+my %modules = ();
+
+@modules{qw(a b c)} = (1) x 3;
+
+print Dumper \%modules;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+__END__
+use My::Module;
+
+my $module = My::Module->new();
+$module->add_segments();
+
+
+
+
+
+
+
+
+
+
+
+__END__
 sub debug {
 	my @messages = @_;
 	use Data::Dumper;
