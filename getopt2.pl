@@ -2,6 +2,8 @@
 
 use Getopt::Long;
 
+@ARGV or usage();
+
 my $todo = 0;
 GetOptions(
 	"help|?" => \&usage,
