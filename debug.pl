@@ -41,3 +41,11 @@ sub debug {
 	print scalar @messages;
 	print "\n>>>\n";
 }
+
+use Test::More;
+sub debug {
+	my $message = shift;
+	if ( $DEBUG ) {
+		note explain $message;
+	}
+}
