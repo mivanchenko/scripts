@@ -1,4 +1,5 @@
 package My::Module;
+use v5.10;
 
 #our @ISA = qw( Exporter );
 #our @EXPORT_OK = qw( add_segments );
@@ -8,6 +9,13 @@ our @EXPORT_OK = qw( add_segments );
 
 our $var = 42;
 my $varlock = 12345;
+
+my $is_test;
+
+sub import {
+	$is_test = !! $_[1];
+	say $is_test;
+}
 
 sub new {
 	return bless {}, __PACKAGE__;
