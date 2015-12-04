@@ -1,3 +1,7 @@
+use Data::Printer;
+sub pp { p $_ for @_ }
+pp "Expected: $expected", 'yo';
+
 sub debug {
 	my $message = shift;
 	print "DEBUG: [$message]\n";
