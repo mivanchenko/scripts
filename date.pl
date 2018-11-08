@@ -35,18 +35,10 @@ print "$date\n";
 
 ######################
 
+use POSIX qw( strftime );
 use Time::HiRes;
 
-my $time0 = Time::HiRes::time;
-say $time0;
-
-my @date = gmtime($time0);
-my $date = sprintf( '%04d-%02d-%02d %02d:%02d:%02d',
-	$date[5] + 1900, $date[4] + 1, reverse @date[0..3] );
+my $t = Time::HiRes::time;
+my $date = strftime '%Y-%m-%d %H:%M:%S', gmtime($t);
+$date .= sprintf '.%03d', ($t-int($t))*1000;
 say $date;
-
-my $msec = 0;
-if ( $time0 =~ m{\.(\d+)} ) {
-	$msec = $1;
-}
-say "$date.$msec";
